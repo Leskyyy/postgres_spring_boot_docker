@@ -9,33 +9,26 @@ package com.odazie.simpleblog.service;
 
 import com.odazie.simpleblog.model.Post;
 import com.odazie.simpleblog.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PostService {
+public class PostService
+{
 
-    private final PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
+    public void savePost( Post post )
+    {
+        postRepository.save( post );
     }
 
-    public void savePost(Post post){
-        getPostRepository().save(post);
+    public List< Post > getAllPosts()
+    {
+        return postRepository.findAll();
     }
 
-    public List<Post> getAllPosts(){
-        return getPostRepository().findAll();
-    }
-
-    public void deletePost(Post post){
-        getPostRepository().delete(post);
-    }
-
-    public PostRepository getPostRepository() {
-        return postRepository;
-    }
 }

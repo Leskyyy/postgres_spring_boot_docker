@@ -8,45 +8,26 @@
 package com.odazie.simpleblog.model;
 
 import com.sun.istack.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "post")
-public class Post {
+@Table( name = "post" )
+@Getter
+@Setter
+public class Post
+{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long postId;
 
     @NotNull
-    @Column(name = "post_title", nullable = false)
+    @Column( name = "post_title", nullable = false )
     private String title;
 
-    @Column(name = "post", columnDefinition = "TEXT")
+    @Column( name = "post", columnDefinition = "TEXT" )
     private String post;
-
-    public Long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPost() {
-        return post;
-    }
-
-    public void setPost(String post) {
-        this.post = post;
-    }
 }
