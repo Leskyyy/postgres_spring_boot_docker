@@ -1,7 +1,14 @@
-package com.odazie.simpleblog.business;
+// ******************************************************************
+//
+// Copyright 2023 PSI Software AG. All rights reserved.
+// PSI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
+//
+// ******************************************************************
 
-import com.odazie.simpleblog.data.entity.Post;
-import com.odazie.simpleblog.data.repository.PostRepository;
+package com.odazie.simpleblog.service;
+
+import com.odazie.simpleblog.model.Post;
+import com.odazie.simpleblog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

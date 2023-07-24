@@ -1,7 +1,14 @@
-package com.odazie.simpleblog.web;
+// ******************************************************************
+//
+// Copyright 2023 PSI Software AG. All rights reserved.
+// PSI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
+//
+// ******************************************************************
 
-import com.odazie.simpleblog.business.PostService;
-import com.odazie.simpleblog.data.entity.Post;
+package com.odazie.simpleblog.controller;
+
+import com.odazie.simpleblog.service.PostService;
+import com.odazie.simpleblog.model.Post;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

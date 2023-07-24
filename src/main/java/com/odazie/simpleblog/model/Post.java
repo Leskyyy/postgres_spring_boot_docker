@@ -1,4 +1,11 @@
-package com.odazie.simpleblog.data.entity;
+// ******************************************************************
+//
+// Copyright 2023 PSI Software AG. All rights reserved.
+// PSI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
+//
+// ******************************************************************
+
+package com.odazie.simpleblog.model;
 
 import com.sun.istack.NotNull;
 
