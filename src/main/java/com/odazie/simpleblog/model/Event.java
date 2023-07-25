@@ -1,5 +1,7 @@
 package com.odazie.simpleblog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +25,7 @@ public class Event
 
     private String name;
 
+    @JsonIgnoreProperties("event")
     @OneToMany(mappedBy = "event")
     private List<Participant> listOfParticipants;
 }

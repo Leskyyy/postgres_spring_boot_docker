@@ -1,8 +1,10 @@
 package com.odazie.simpleblog.seed;
 
 import com.odazie.simpleblog.model.Event;
+import com.odazie.simpleblog.model.Participant;
 import com.odazie.simpleblog.model.User;
 import com.odazie.simpleblog.repository.EventRepository;
+import com.odazie.simpleblog.repository.ParticipantRepository;
 import com.odazie.simpleblog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,11 +22,15 @@ public class DataLoader implements CommandLineRunner
     @Autowired
     EventRepository eventRepository;
 
+    @Autowired
+    ParticipantRepository participantRepository;
+
     @Override
     public void run( String ... args ) throws Exception
     {
         loadUserData();
         loadEventData();
+        loadParticipantData();
     }
 
     private void loadUserData()
@@ -69,5 +75,30 @@ public class DataLoader implements CommandLineRunner
         event3.setName("Boys Night Out");
 
         eventRepository.saveAll( List.of( event1, event2, event3 ) );
+    }
+
+    private void loadParticipantData()
+    {
+        Participant participant1 = new Participant();
+        participant1.setEvent( eventRepository.findByEventId( 1L ) );
+        participant1.setMyuser( userRepository.findByUserId( 1L ) );
+
+        Participant participant2 = new Participant();
+        participant2.setEvent( eventRepository.findByEventId( 1L ) );
+        participant2.setMyuser( userRepository.findByUserId( 2L ) );
+
+        Participant participant3 = new Participant();
+        participant3.setEvent( eventRepository.findByEventId( 2L ) );
+        participant3.setMyuser( userRepository.findByUserId( 3L ) );
+
+        Participant participant4 = new Participant();
+        participant4.setEvent( eventRepository.findByEventId( 2L ) );
+        participant4.setMyuser( userRepository.findByUserId( 4L ) );
+
+        Participant participant5 = new Participant();
+        participant5.setEvent( eventRepository.findByEventId( 3L ) );
+        participant5.setMyuser( userRepository.findByUserId( 5L ) );
+
+        participantRepository.saveAll( List.of( participant1, participant2, participant3, participant4, participant5 ) );
     }
 }

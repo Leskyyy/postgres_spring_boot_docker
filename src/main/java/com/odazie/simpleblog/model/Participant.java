@@ -1,5 +1,7 @@
 package com.odazie.simpleblog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,10 +31,12 @@ public class Participant {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Loan> listOfLoans = new ArrayList<>();
 
+    @JsonIgnoreProperties("listOfParticipants")
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
 
+    @JsonIgnoreProperties("eventParticipants")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User myuser;
