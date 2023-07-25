@@ -1,27 +1,30 @@
 package com.odazie.simpleblog.seed;
 
+import com.odazie.simpleblog.model.Event;
 import com.odazie.simpleblog.model.User;
+import com.odazie.simpleblog.repository.EventRepository;
 import com.odazie.simpleblog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Component
-public class UserDataLoader implements CommandLineRunner
+public class DataLoader implements CommandLineRunner
 {
 
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    EventRepository eventRepository;
+
     @Override
     public void run( String ... args ) throws Exception
     {
         loadUserData();
+        loadEventData();
     }
 
     private void loadUserData()
@@ -52,5 +55,19 @@ public class UserDataLoader implements CommandLineRunner
         user5.setPassword( "StrongP@ssw0rd" );
 
         userRepository.saveAll( List.of( user1, user2, user3, user4, user5 ) );
+    }
+
+    private void loadEventData()
+    {
+        Event event1 = new Event();
+        event1.setName( "Trip to Szklarska" );
+
+        Event event2 = new Event();
+        event2.setName("Nocny Targ");
+
+        Event event3 = new Event();
+        event3.setName("Boys Night Out");
+
+        eventRepository.saveAll( List.of( event1, event2, event3 ) );
     }
 }
