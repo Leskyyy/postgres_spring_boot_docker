@@ -7,11 +7,14 @@ import com.odazie.simpleblog.model.User;
 import com.odazie.simpleblog.repository.EventRepository;
 import com.odazie.simpleblog.repository.ParticipantRepository;
 import com.odazie.simpleblog.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DataLoader implements CommandLineRunner {
 
     @Autowired
@@ -23,6 +26,8 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     ParticipantRepository participantRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public void run(String... args) throws Exception {
         loadUserData();
@@ -33,7 +38,7 @@ public class DataLoader implements CommandLineRunner {
     private void loadUserData() {
         User user1 = new User();
         user1.setEmail("john.doe@gmail.com");
-        user1.setPassword("password123");
+        user1.setPassword(passwordEncoder.encode("password123"));
         user1.setRole(Role.USER);
 
         if (userRepository.findByEmail(user1.getEmail()).isEmpty()) {
@@ -42,7 +47,7 @@ public class DataLoader implements CommandLineRunner {
 
         User user2 = new User();
         user2.setEmail("emma.smith@yahoo.com");
-        user2.setPassword("p@ssword!");
+        user2.setPassword(passwordEncoder.encode("p@ssword!"));
         user2.setRole(Role.USER);
 
         if (userRepository.findByEmail(user2.getEmail()).isEmpty()) {
@@ -51,7 +56,7 @@ public class DataLoader implements CommandLineRunner {
 
         User user3 = new User();
         user3.setEmail("williamj@example.com");
-        user3.setPassword("securePassword");
+        user3.setPassword(passwordEncoder.encode("securePassword"));
         user3.setRole(Role.USER);
 
         if (userRepository.findByEmail(user3.getEmail()).isEmpty()) {
@@ -60,7 +65,7 @@ public class DataLoader implements CommandLineRunner {
 
         User user4 = new User();
         user4.setEmail("laura_hernandez@hotmail.com");
-        user4.setPassword("myP@$$w0rd");
+        user4.setPassword(passwordEncoder.encode("myP@$$w0rd"));
         user4.setRole(Role.USER);
 
         if (userRepository.findByEmail(user4.getEmail()).isEmpty()) {
@@ -69,7 +74,7 @@ public class DataLoader implements CommandLineRunner {
 
         User user5 = new User();
         user5.setEmail("alex_wong@outlook.com");
-        user5.setPassword("StrongP@ssw0rd");
+        user5.setPassword(passwordEncoder.encode("StrongP@ssw0rd"));
         user5.setRole(Role.USER);
 
         if (userRepository.findByEmail(user5.getEmail()).isEmpty()) {
@@ -102,42 +107,42 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadParticipantData() {
         Participant participant1 = new Participant();
-        participant1.setEvent(eventRepository.findByEventId(1L));
-        participant1.setMyuser(userRepository.findByUserId(1L));
+        participant1.setEvent(eventRepository.findByName("Trip to Szklarska").get());
+        participant1.setMyuser(userRepository.findByEmail("john.doe@gmail.com").get());
 
-        if (participantRepository.findByEventAndMyuser(1L, 1L).isEmpty()) {
+        if (participantRepository.findByEventAndMyuser(participant1.getEvent().getEventId(), participant1.getMyuser().getUserId()).isEmpty()) {
             participantRepository.save(participant1);
         }
 
         Participant participant2 = new Participant();
-        participant2.setEvent(eventRepository.findByEventId(1L));
-        participant2.setMyuser(userRepository.findByUserId(2L));
+        participant2.setEvent(eventRepository.findByName("Trip to Szklarska").get());
+        participant2.setMyuser(userRepository.findByEmail("emma.smith@yahoo.com").get());
 
-        if (participantRepository.findByEventAndMyuser(1L, 2L).isEmpty()) {
+        if (participantRepository.findByEventAndMyuser(participant2.getEvent().getEventId(), participant2.getMyuser().getUserId()).isEmpty()) {
             participantRepository.save(participant2);
         }
 
         Participant participant3 = new Participant();
-        participant3.setEvent(eventRepository.findByEventId(2L));
-        participant3.setMyuser(userRepository.findByUserId(3L));
+        participant3.setEvent(eventRepository.findByName("Nocny Targ").get());
+        participant3.setMyuser(userRepository.findByEmail("williamj@example.com").get());
 
-        if (participantRepository.findByEventAndMyuser(2L, 3L).isEmpty()) {
+        if (participantRepository.findByEventAndMyuser(participant3.getEvent().getEventId(), participant3.getMyuser().getUserId()).isEmpty()) {
             participantRepository.save(participant3);
         }
 
         Participant participant4 = new Participant();
-        participant4.setEvent(eventRepository.findByEventId(2L));
-        participant4.setMyuser(userRepository.findByUserId(4L));
+        participant4.setEvent(eventRepository.findByName("Nocny Targ").get());
+        participant4.setMyuser(userRepository.findByEmail("laura_hernandez@hotmail.com").get());
 
-        if (participantRepository.findByEventAndMyuser(2L, 4L).isEmpty()) {
+        if (participantRepository.findByEventAndMyuser(participant4.getEvent().getEventId(), participant4.getMyuser().getUserId()).isEmpty()) {
             participantRepository.save(participant4);
         }
 
         Participant participant5 = new Participant();
-        participant5.setEvent(eventRepository.findByEventId(3L));
-        participant5.setMyuser(userRepository.findByUserId(5L));
+        participant5.setEvent(eventRepository.findByName("Boys Night Out").get());
+        participant5.setMyuser(userRepository.findByEmail("alex_wong@outlook.com").get());
 
-        if (participantRepository.findByEventAndMyuser(3L, 5L).isEmpty()) {
+        if (participantRepository.findByEventAndMyuser(participant5.getEvent().getEventId(), participant5.getMyuser().getUserId()).isEmpty()) {
             participantRepository.save(participant5);
         }
     }
