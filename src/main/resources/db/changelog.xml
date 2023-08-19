@@ -70,7 +70,9 @@
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-6">
         <preConditions onFail="MARK_RAN">
-            <foreignKeyConstraintExists foreignKeyName="fkklkgctsb7l0ujnpsyljwdr14n"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fkklkgctsb7l0ujnpsyljwdr14n"/>
+            </not>
         </preConditions>
         <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="loan"
                                  constraintName="fkklkgctsb7l0ujnpsyljwdr14n" deferrable="false"
@@ -80,7 +82,9 @@
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-7">
         <preConditions onFail="MARK_RAN">
-            <foreignKeyConstraintExists foreignKeyName="fkojeqkvv72xcx0ytdqkik7objq"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fkojeqkvv72xcx0ytdqkik7objq"/>
+            </not>
         </preConditions>
         <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="participant"
                                  constraintName="fkojeqkvv72xcx0ytdqkik7objq" deferrable="false"
@@ -89,7 +93,9 @@
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-8">
         <preConditions onFail="MARK_RAN">
-            <foreignKeyConstraintExists foreignKeyName="fktn2ikxb7c7ij67m83256w0y2c"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fktn2ikxb7c7ij67m83256w0y2c"/>
+            </not>
         </preConditions>
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="participant"
                                  constraintName="fktn2ikxb7c7ij67m83256w0y2c" deferrable="false"
