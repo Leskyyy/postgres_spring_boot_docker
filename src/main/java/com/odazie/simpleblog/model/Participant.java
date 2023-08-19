@@ -36,7 +36,7 @@ public class Participant {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    @JsonIgnoreProperties("eventParticipants")
+    @JsonIgnoreProperties("authorities")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User myuser;

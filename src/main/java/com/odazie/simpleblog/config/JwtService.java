@@ -15,13 +15,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtUtil
+public class JwtService
 {
 
     private static final String SECRET_KEY =
         "32b968789977db75a18fc71fb4df663c071b679176508d01ff2e4bfba1ea85a9";
 
-    public String extractEmail( String jwt )
+    public String extractUsername( String jwt )
     {
         return extractClaim( jwt, Claims::getSubject );
     }
@@ -50,8 +50,8 @@ public class JwtUtil
 
     public boolean isTokenValid( String jwt, UserDetails userDetails )
     {
-        final String email = extractEmail( jwt );
-        return (email.equals( userDetails.getUsername() )) && !isTokenExpired( jwt );
+        final String username = extractUsername( jwt );
+        return (username.equals( userDetails.getUsername() )) && !isTokenExpired( jwt );
     }
 
     public boolean isTokenExpired( String jwt )

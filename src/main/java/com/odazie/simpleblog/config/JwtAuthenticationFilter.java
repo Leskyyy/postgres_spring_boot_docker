@@ -1,6 +1,7 @@
 package com.odazie.simpleblog.config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,11 +19,12 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter
 {
 
-    private final JwtUtil jwtUtil;
-    private UserDetailsService userDetailsService;
+    private final JwtService jwtUtil;
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal( @NonNull HttpServletRequest aHttpServletRequest,
@@ -40,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
         }
 
         jwt = authenticationHeader.substring( 7 );
-        email = jwtUtil.extractEmail( jwt );
+        email = jwtUtil.extractUsername( jwt );
 
         if( email != null && SecurityContextHolder.getContext()
             .getAuthentication() == null )

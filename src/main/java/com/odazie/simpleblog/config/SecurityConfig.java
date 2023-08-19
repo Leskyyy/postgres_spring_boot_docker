@@ -28,7 +28,7 @@ public class SecurityConfig
         http.csrf()
             .disable()
             .authorizeRequests()
-            .antMatchers( "" )
+            .antMatchers( "/api/auth/**" )
             .permitAll()
             .anyRequest()
             .authenticated()

@@ -2,6 +2,7 @@ package com.odazie.simpleblog.seed;
 
 import com.odazie.simpleblog.model.Event;
 import com.odazie.simpleblog.model.Participant;
+import com.odazie.simpleblog.model.Role;
 import com.odazie.simpleblog.model.User;
 import com.odazie.simpleblog.repository.EventRepository;
 import com.odazie.simpleblog.repository.ParticipantRepository;
@@ -37,28 +38,28 @@ public class DataLoader implements CommandLineRunner
     {
         User user1 = new User();
         user1.setEmail( "john.doe@gmail.com" );
-        user1.setUsername( "johndoe" );
         user1.setPassword( "password123" );
+        user1.setRole( Role.USER);
 
         User user2 = new User();
         user2.setEmail( "emma.smith@yahoo.com" );
-        user2.setUsername( "emmas" );
         user2.setPassword( "p@ssword!" );
+        user2.setRole( Role.USER);
 
         User user3 = new User();
         user3.setEmail( "williamj@example.com" );
-        user3.setUsername( "willj" );
         user3.setPassword( "securePassword" );
+        user3.setRole( Role.USER);
 
         User user4 = new User();
         user4.setEmail( "laura_hernandez@hotmail.com" );
-        user4.setUsername( "laurah" );
         user4.setPassword( "myP@$$w0rd" );
+        user4.setRole( Role.USER);
 
         User user5 = new User();
         user5.setEmail( "alex_wong@outlook.com" );
-        user5.setUsername( "alexwong" );
         user5.setPassword( "StrongP@ssw0rd" );
+        user5.setRole( Role.USER);
 
         userRepository.saveAll( List.of( user1, user2, user3, user4, user5 ) );
     }
