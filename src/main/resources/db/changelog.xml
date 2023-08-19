@@ -1,9 +1,23 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="lesky (generated)" id="1692466269539-1">
-        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="lesky (generated)" id="1692466269539-1">\
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="hibernate_sequence"/>
+            </not>
+        </preConditions>
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
+                        minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="event"/>
+            </not>
+        </preConditions>
         <createTable tableName="event">
             <column autoIncrement="true" name="event_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="event_pkey"/>
@@ -12,6 +26,11 @@
         </createTable>
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="loan"/>
+            </not>
+        </preConditions>
         <createTable tableName="loan">
             <column autoIncrement="true" name="loan_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="loan_pkey"/>
@@ -21,6 +40,11 @@
         </createTable>
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="myuser"/>
+            </not>
+        </preConditions>
         <createTable tableName="myuser">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="myuser_pkey"/>
@@ -31,6 +55,11 @@
         </createTable>
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="participant"/>
+            </not>
+        </preConditions>
         <createTable tableName="participant">
             <column autoIncrement="true" name="participant_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="participant_pkey"/>
@@ -40,12 +69,31 @@
         </createTable>
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-6">
-        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="loan" constraintName="fkklkgctsb7l0ujnpsyljwdr14n" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="participant_id" referencedTableName="participant" validate="true"/>
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fkklkgctsb7l0ujnpsyljwdr14n"/>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="loan"
+                                 constraintName="fkklkgctsb7l0ujnpsyljwdr14n" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="participant_id" referencedTableName="participant"
+                                 validate="true"/>
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-7">
-        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="participant" constraintName="fkojeqkvv72xcx0ytdqkik7objq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="event_id" referencedTableName="event" validate="true"/>
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fkojeqkvv72xcx0ytdqkik7objq"/>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="participant"
+                                 constraintName="fkojeqkvv72xcx0ytdqkik7objq" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="event_id" referencedTableName="event" validate="true"/>
     </changeSet>
     <changeSet author="lesky (generated)" id="1692466269539-8">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="participant" constraintName="fktn2ikxb7c7ij67m83256w0y2c" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="myuser" validate="true"/>
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fktn2ikxb7c7ij67m83256w0y2c"/>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="participant"
+                                 constraintName="fktn2ikxb7c7ij67m83256w0y2c" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="user_id" referencedTableName="myuser" validate="true"/>
     </changeSet>
 </databaseChangeLog>
