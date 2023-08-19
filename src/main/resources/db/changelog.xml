@@ -1,0 +1,51 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="lesky (generated)" id="1692466269539-1">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
+    </changeSet>
+    <changeSet author="lesky (generated)" id="1692466269539-2">
+        <createTable tableName="event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="event_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lesky (generated)" id="1692466269539-3">
+        <createTable tableName="loan">
+            <column autoIncrement="true" name="loan_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="loan_pkey"/>
+            </column>
+            <column name="amount" type="FLOAT4"/>
+            <column name="owner_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lesky (generated)" id="1692466269539-4">
+        <createTable tableName="myuser">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="myuser_pkey"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="role" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lesky (generated)" id="1692466269539-5">
+        <createTable tableName="participant">
+            <column autoIncrement="true" name="participant_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="participant_pkey"/>
+            </column>
+            <column name="event_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lesky (generated)" id="1692466269539-6">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="loan" constraintName="fkklkgctsb7l0ujnpsyljwdr14n" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="participant_id" referencedTableName="participant" validate="true"/>
+    </changeSet>
+    <changeSet author="lesky (generated)" id="1692466269539-7">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="participant" constraintName="fkojeqkvv72xcx0ytdqkik7objq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="event_id" referencedTableName="event" validate="true"/>
+    </changeSet>
+    <changeSet author="lesky (generated)" id="1692466269539-8">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="participant" constraintName="fktn2ikxb7c7ij67m83256w0y2c" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="myuser" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
