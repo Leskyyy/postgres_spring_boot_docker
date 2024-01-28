@@ -38,13 +38,10 @@ public class User implements UserDetails
     @GeneratedValue
     private Long userId;
 
-//    @NotBlank
-//    @Email( message = "Invalid email address" )
-//    @Column(unique = true)
+    @NotBlank
+    @Email( message = "Invalid email address" )
+    @Column(unique = true)
     private String email;
-
-//    @Column(unique = true)
-//    private String username;
 
     private String password;
 
