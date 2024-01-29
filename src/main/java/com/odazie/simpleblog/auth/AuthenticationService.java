@@ -9,6 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +45,15 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwt)
                 .build();
+    }
+
+    public Boolean validateToken(String token) {
+        User user;
+        try {
+            user = userRepository.findByEmail(jwtService.extractUsername(token)).orElseThrow();
+        } catch (Exception e) {
+            return false;
+        }
+        return jwtService.isTokenValid(token, user);
     }
 }
